@@ -1,0 +1,8 @@
+node_modules
+.env
+build
+coverage
+coverage.json
+dist
+typechain-types
+*.DS_Store
