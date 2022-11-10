@@ -4,12 +4,13 @@ const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts } = hre;
   const { deployer } = await getNamedAccounts();
   const { deploy } = deployments;
-  await deploy("MyToken", {
+
+  await deploy("ETHRegistrarController", {
     from: deployer,
     args: [],
     log: true,
     deterministicDeployment: false,
   });
 };
-deploy.tags = ["MyToken"];
+deploy.tags = ["ETHRegistrarController"];
 export default deploy;

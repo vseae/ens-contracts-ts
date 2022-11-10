@@ -9,7 +9,7 @@ import "hardhat-gas-reporter";
 import dotenv from "dotenv";
 import yargs from "yargs";
 import { ProxyAgent, setGlobalDispatcher } from "undici";
-import "./scripts/tasks/deploy_verify";
+import "./scripts/tasks/deploy-verify";
 // proxy
 const proxyAgent: ProxyAgent = new ProxyAgent("http://127.0.0.1:7890");
 setGlobalDispatcher(proxyAgent);
