@@ -67,12 +67,10 @@
     "yargs": "^16.1.1"
   },
   "dependencies": {
-    "@ensdomains/buffer": "^0.0.13",
-    "@ensdomains/eth-ens-namehash": "^2.0.15",
-    "@ensdomains/solsha1": "0.0.3",
     "@openzeppelin/contracts": "^4.7.3",
     "@openzeppelin/contracts-upgradeable": "^4.7.3",
-    "eth-ens-namehash": "^2.0.8",
-    "undici": "^5.8.0"
+    "undici": "^5.8.0",
+    "@ensdomains/buffer": "^0.0.13",
+    "@ensdomains/solsha1": "0.0.3"
   }
 }
