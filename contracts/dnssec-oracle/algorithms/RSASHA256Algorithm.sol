@@ -5,12 +5,16 @@ import "../BytesUtils.sol";
 import "./RSAVerify.sol";
 
 /**
-* @dev Implements the DNSSEC RSASHA256 algorithm.
-*/
+ * @dev Implements the DNSSEC RSASHA256 algorithm.
+ */
 contract RSASHA256Algorithm is Algorithm {
     using BytesUtils for *;
 
-    function verify(bytes calldata key, bytes calldata data, bytes calldata sig) external override view returns (bool) {
+    function verify(
+        bytes calldata key,
+        bytes calldata data,
+        bytes calldata sig
+    ) external view override returns (bool) {
         bytes memory exponent;
         bytes memory modulus;
 

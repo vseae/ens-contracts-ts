@@ -6,12 +6,16 @@ import "./RSAVerify.sol";
 import "@ensdomains/solsha1/contracts/SHA1.sol";
 
 /**
-* @dev Implements the DNSSEC RSASHA1 algorithm.
-*/
+ * @dev Implements the DNSSEC RSASHA1 algorithm.
+ */
 contract RSASHA1Algorithm is Algorithm {
     using BytesUtils for *;
 
-    function verify(bytes calldata key, bytes calldata data, bytes calldata sig) external override view returns (bool) {
+    function verify(
+        bytes calldata key,
+        bytes calldata data,
+        bytes calldata sig
+    ) external view override returns (bool) {
         bytes memory exponent;
         bytes memory modulus;
 

@@ -5,17 +5,20 @@ import "./EllipticCurve.sol";
 import "../BytesUtils.sol";
 
 contract P256SHA256Algorithm is Algorithm, EllipticCurve {
-
     using BytesUtils for *;
 
     /**
-    * @dev Verifies a signature.
-    * @param key The public key to verify with.
-    * @param data The signed data to verify.
-    * @param signature The signature to verify.
-    * @return True iff the signature is valid.
-    */
-    function verify(bytes calldata key, bytes calldata data, bytes calldata signature) external override view returns (bool) {
+     * @dev Verifies a signature.
+     * @param key The public key to verify with.
+     * @param data The signed data to verify.
+     * @param signature The signature to verify.
+     * @return True iff the signature is valid.
+     */
+    function verify(
+        bytes calldata key,
+        bytes calldata data,
+        bytes calldata signature
+    ) external view override returns (bool) {
         return validateSignature(sha256(data), parseSignature(signature), parseKey(key));
     }
 

@@ -30,9 +30,7 @@ contract ReverseRegistrar is Ownable, Controllable {
         defaultResolver = resolverAddr;
 
         // Assign ownership of the reverse record to our deployer
-        ReverseRegistrar oldRegistrar = ReverseRegistrar(
-            ens.owner(ADDR_REVERSE_NODE)
-        );
+        ReverseRegistrar oldRegistrar = ReverseRegistrar(ens.owner(ADDR_REVERSE_NODE));
         if (address(oldRegistrar) != address(0x0)) {
             oldRegistrar.claim(msg.sender);
         }
@@ -40,10 +38,7 @@ contract ReverseRegistrar is Ownable, Controllable {
 
     modifier authorised(address addr) {
         require(
-            addr == msg.sender ||
-                controllers[msg.sender] ||
-                ens.isApprovedForAll(addr, msg.sender) ||
-                ownsContract(addr),
+            addr == msg.sender || controllers[msg.sender] || ens.isApprovedForAll(addr, msg.sender) || ownsContract(addr),
             "Caller is not a controller or authorised by address or the address itself"
         );
         _;
@@ -66,11 +61,7 @@ contract ReverseRegistrar is Ownable, Controllable {
      * @param owner The address to set as the owner of the reverse record in ENS.
      * @return The ENS node hash of the reverse record.
      */
-    function claimForAddr(address addr, address owner)
-        public
-        authorised(addr)
-        returns (bytes32)
-    {
+    function claimForAddr(address addr, address owner) public authorised(addr) returns (bytes32) {
         return _claimWithResolver(addr, owner, address(0x0));
     }
 
@@ -81,10 +72,7 @@ contract ReverseRegistrar is Ownable, Controllable {
      * @param resolver The address of the resolver to set; 0 to leave unchanged.
      * @return The ENS node hash of the reverse record.
      */
-    function claimWithResolver(address owner, address resolver)
-        public
-        returns (bytes32)
-    {
+    function claimWithResolver(address owner, address resolver) public returns (bytes32) {
         return _claimWithResolver(msg.sender, owner, resolver);
     }
 
@@ -112,11 +100,7 @@ contract ReverseRegistrar is Ownable, Controllable {
      * @return The ENS node hash of the reverse record.
      */
     function setName(string memory name) public returns (bytes32) {
-        bytes32 node = _claimWithResolver(
-            msg.sender,
-            address(this),
-            address(defaultResolver)
-        );
+        bytes32 node = _claimWithResolver(msg.sender, address(this), address(defaultResolver));
         defaultResolver.setName(node, name);
         return node;
     }
@@ -136,11 +120,7 @@ contract ReverseRegistrar is Ownable, Controllable {
         address owner,
         string memory name
     ) public authorised(addr) returns (bytes32) {
-        bytes32 node = _claimWithResolver(
-            addr,
-            address(this),
-            address(defaultResolver)
-        );
+        bytes32 node = _claimWithResolver(addr, address(this), address(defaultResolver));
         defaultResolver.setName(node, name);
         ens.setSubnodeOwner(ADDR_REVERSE_NODE, sha3HexAddress(addr), owner);
         return node;
@@ -152,10 +132,7 @@ contract ReverseRegistrar is Ownable, Controllable {
      * @return The ENS node hash.
      */
     function node(address addr) public pure returns (bytes32) {
-        return
-            keccak256(
-                abi.encodePacked(ADDR_REVERSE_NODE, sha3HexAddress(addr))
-            );
+        return keccak256(abi.encodePacked(ADDR_REVERSE_NODE, sha3HexAddress(addr)));
     }
 
     /**
@@ -194,8 +171,7 @@ contract ReverseRegistrar is Ownable, Controllable {
         bytes32 label = sha3HexAddress(addr);
         bytes32 node = keccak256(abi.encodePacked(ADDR_REVERSE_NODE, label));
         address currentResolver = ens.resolver(node);
-        bool shouldUpdateResolver = (resolver != address(0x0) &&
-            resolver != currentResolver);
+        bool shouldUpdateResolver = (resolver != address(0x0) && resolver != currentResolver);
         address newResolver = shouldUpdateResolver ? resolver : currentResolver;
 
         ens.setSubnodeRecord(ADDR_REVERSE_NODE, label, owner, newResolver, 0);

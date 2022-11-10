@@ -22,21 +22,19 @@ interface INameWrapper is IERC1155 {
         SubdomainReplacementAllowed,
         Expired
     }
-    event NameWrapped(
-        bytes32 indexed node,
-        bytes name,
-        address owner,
-        uint96 fuses
-    );
+    event NameWrapped(bytes32 indexed node, bytes name, address owner, uint96 fuses);
 
     event NameUnwrapped(bytes32 indexed node, address owner);
 
     event FusesBurned(bytes32 indexed node, uint96 fuses);
 
-    function ens() external view returns(ENS);
-    function registrar() external view returns(BaseRegistrar);
-    function metadataService() external view returns(IMetadataService);
-    function names(bytes32) external view returns(bytes memory);
+    function ens() external view returns (ENS);
+
+    function registrar() external view returns (BaseRegistrar);
+
+    function metadataService() external view returns (IMetadataService);
+
+    function names(bytes32) external view returns (bytes memory);
 
     function wrap(
         bytes calldata name,
@@ -60,9 +58,7 @@ interface INameWrapper is IERC1155 {
         uint96 _fuses
     ) external returns (uint256 expires);
 
-    function renew(uint256 labelHash, uint256 duration)
-        external
-        returns (uint256 expires);
+    function renew(uint256 labelHash, uint256 duration) external returns (uint256 expires);
 
     function unwrap(
         bytes32 node,
@@ -115,9 +111,7 @@ interface INameWrapper is IERC1155 {
         uint96 _fuses
     ) external returns (bytes32);
 
-    function isTokenOwnerOrApproved(bytes32 node, address addr)
-        external
-        returns (bool);
+    function isTokenOwnerOrApproved(bytes32 node, address addr) external returns (bool);
 
     function setResolver(bytes32 node, address resolver) external;
 
@@ -131,8 +125,5 @@ interface INameWrapper is IERC1155 {
             bytes32
         );
 
-    function allFusesBurned(bytes32 node, uint96 fuseMask)
-        external
-        view
-        returns (bool);
+    function allFusesBurned(bytes32 node, uint96 fuseMask) external view returns (bool);
 }

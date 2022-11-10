@@ -6,6 +6,7 @@ import "../ResolverBase.sol";
 
 interface IABIResolver {
     event ABIChanged(bytes32 indexed node, uint256 indexed contentType);
+
     /**
      * Returns the ABI associated with an ENS node.
      * Defined in EIP205.

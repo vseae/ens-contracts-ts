@@ -69,6 +69,8 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
     "@openzeppelin/contracts-upgradeable": "^4.7.3",
-    "undici": "^5.8.0"
+    "undici": "^5.8.0",
+    "@ensdomains/buffer": "^0.0.13",
+    "@ensdomains/solsha1": "0.0.3"
   }
 }
