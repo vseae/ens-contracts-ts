@@ -15,5 +15,5 @@ const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 };
 deploy.tags = ["controller"];
-deploy.dependencies = ["registrar", "oracle"];
+deploy.dependencies = ["registrar", "oracle", "resolver"];
 export default deploy;
