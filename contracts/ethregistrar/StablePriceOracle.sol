@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// TODO 更改stablePriceOracle的逻辑，改为定长收费
 pragma solidity >=0.8.4;
 
 import "./PriceOracle.sol";
@@ -27,7 +29,7 @@ contract StablePriceOracle is Ownable, PriceOracle {
     bytes4 private constant INTERFACE_META_ID = bytes4(keccak256("supportsInterface(bytes4)"));
     bytes4 private constant ORACLE_ID = bytes4(keccak256("price(string,uint256,uint256)") ^ keccak256("premium(string,uint256,uint256)"));
 
-    constructor(AggregatorInterface _usdOracle, uint256[] memory _rentPrices) public {
+    constructor(AggregatorInterface _usdOracle, uint256[] memory _rentPrices) {
         usdOracle = _usdOracle;
         setPrices(_rentPrices);
     }

@@ -11,7 +11,7 @@ import "../resolvers/Resolver.sol";
  */
 contract ETHRegistrarController is Ownable {
     using StringUtils for *;
-
+    // 域名最小租期
     uint256 public constant MIN_REGISTRATION_DURATION = 28 days;
 
     bytes4 private constant INTERFACE_META_ID = bytes4(keccak256("supportsInterface(bytes4)"));
@@ -31,8 +31,8 @@ contract ETHRegistrarController is Ownable {
                 keccak256("makeCommitmentWithConfig(string,address,bytes32,address,address)")
         );
 
-    BaseRegistrarImplementation base;
-    PriceOracle prices;
+    BaseRegistrarImplementation internal base;
+    PriceOracle internal prices;
     uint256 public minCommitmentAge;
     uint256 public maxCommitmentAge;
 
