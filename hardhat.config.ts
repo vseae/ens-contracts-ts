@@ -88,6 +88,11 @@ const config: HardhatUserConfig = {
       chainId: 5,
       url: `https://goerli.infura.io/v3/${INFURA_KEY}`,
     },
+    fantomTest: {
+      ...userNetworkConfig,
+      chainId: 4002,
+      url: `https://rpc.testnet.fantom.network`,
+    },
   },
   namedAccounts: {
     deployer: 0,

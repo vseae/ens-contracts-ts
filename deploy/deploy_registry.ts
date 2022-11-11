@@ -5,15 +5,20 @@ const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts } = hre;
   const { deployer } = await getNamedAccounts();
   const { deploy } = deployments;
-  const registrar = await deployments.get("BaseRegistrarImplementation");
-  const oracle = await deployments.get("FixedPriceOracle");
-  await deploy("ETHRegistrarController", {
+  const ENSRegistryResult = await deploy("ENSRegistry", {
     from: deployer,
-    args: [registrar.address, oracle.address, 60, 86400],
+    args: [],
     log: true,
     deterministicDeployment: false,
   });
+  if (ENSRegistryResult.newlyDeployed) {
+    await deploy("ENSRegistryWithFallback", {
+      from: deployer,
+      args: [ENSRegistryResult.address],
+      log: true,
+      deterministicDeployment: false,
+    });
+  }
 };
-deploy.tags = ["controller"];
-deploy.dependencies = ["registrar", "oracle"];
+deploy.tags = ["registry"];
 export default deploy;
