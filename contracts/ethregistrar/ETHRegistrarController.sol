@@ -31,8 +31,8 @@ contract ETHRegistrarController is Ownable {
                 keccak256("makeCommitmentWithConfig(string,address,bytes32,address,address)")
         );
 
-    BaseRegistrarImplementation internal base;
-    PriceOracle internal prices;
+    BaseRegistrarImplementation base;
+    PriceOracle prices;
     uint256 public minCommitmentAge;
     uint256 public maxCommitmentAge;
 
