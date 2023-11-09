@@ -8,8 +8,11 @@ contract SimplePublicSuffixList is PublicSuffixList, Ownable {
     mapping(bytes => bool) suffixes;
 
     function addPublicSuffixes(bytes[] memory names) public onlyOwner {
-        for (uint256 i = 0; i < names.length; i++) {
+        for (uint256 i; i < names.length;) {
             suffixes[names[i]] = true;
+            unchecked {
+                ++i;
+            }
         }
     }
 
